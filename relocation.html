@@ -257,8 +257,7 @@ body.fade-out{
         <span>Fill in the details below and we’ll assist you.</span>
     </div>
 
-    <form action="https://script.google.com/macros/s/AKfycbyeU7zDTntJ9npOXwDOZboJNStRoU6lW1OV66GcZX5v4yG0xYOuU2n7yflww8ZqbeXD/exec" method="POST">
-	
+    <form id="relocation_form">
 
         <div class="chat-group">
             <label>Full Name</label>
@@ -318,6 +317,29 @@ document.querySelectorAll("a").forEach(link => {
             window.location.href = href;
         }, 400);
     });
+});
+</script>
+
+<script>
+document.getElementById("relocation_form").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const form = this;
+    const formData = new FormData(form);
+
+    try{
+        await fetch("https://script.google.com/macros/s/AKfycbwfV7DpXh2NyTLmBu7xTHIkCXqoiU4Nkg_hcaHbKpUX0GtWzpK0F9qMf1a5jn_Pb1iY7Q/exec", {
+            method: "POST",
+            body: formData
+        });
+
+        // redirect BACK to your HTML page (or show success page)
+        window.location.href = "Inconnek.html";
+
+    }catch(error){
+        alert("Submission failed. Please try again.");
+        console.error(error);
+    }
 });
 </script>
 
